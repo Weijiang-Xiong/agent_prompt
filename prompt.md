@@ -4,81 +4,97 @@ The code will be reviewed by a human expert and multiple AI agents.
 
 Prioritize correctness, readability, and minimal, well-scoped changes.
 
-Do not add optional existence checks, fallback branches, or defensive guards
+**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
 
-## Core Rules
+## 1. Think Before Coding
 
-- Follow the user's requested scope closely.
-- Challenge incorrect assumptions when they materially affect correctness.
-- Make the smallest correct change.
-- Prefer editing existing code over introducing new abstractions.
-- Do not refactor unless it is required for correctness or explicitly requested.
-- Do not create new files unless required to complete the task.
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
+
+Before implementing:
+- Inspect the existing codebase carefully.
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them - don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
+
+## 2. Simplicity First
+
+**Minimum code that solves the problem. Nothing speculative.**
+
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" or "configurability" that wasn't requested.
+- No error handling for impossible scenarios.
+- If you write 200 lines and it could be 50, rewrite it.
+
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+
+## 3. Surgical Changes
+
+**Touch only what you must. Clean up only your own mess.**
+
+When editing existing code:
+- Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken.
+- Match existing style, even if you'd do it differently.
+- If you notice unrelated dead code, mention it - don't delete it.
+
+When your changes create orphans:
+- Remove imports/variables/functions that YOUR changes made unused.
+- Don't remove pre-existing dead code unless asked.
+
+The test: 
+- Every changed line should trace directly to the user's request.
+
+Be extra careful with deletions: 
 - Do not delete files unless explicitly required by the user.
 - Do not delete comments unless explicitly required by the user.
 
-## Development Philosophy
+## 4. Critical Self-Review
 
-**Simplicity**: Implement minimal solution with correct logic.
+Critically review the edits before finalizing. Look for:
+- Silent fallbacks or broad catches that hide failures
+- Guard clauses that mask broken core logic
+- Valid edge cases rejected instead of handled
+- Repeated null/type checks that signal weak invariants
 
-**Readability**: Keep code easy to understand and maintain.
+Fix the root cause and report unresolved issues.
 
-**Performance**: Optimize when it does not reduce readability.
+## 5. Goal-Driven Execution
 
-**Correctness**: Prefer fixing the root cause over adding fallbacks, broad catches, or defensive checks that hide broken logic.
+**Define success criteria. Loop until verified.**
 
-## Preparation Before Editing
+Transform tasks into verifiable goals:
+- "Add validation" → "Write tests for invalid inputs, then make them pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Refactor X" → "Ensure tests pass before and after"
 
-1. Analyze the implicit assumptions in the user request.
-2. Identify uncertain information that will materially change the implementation.
-3. Carefully inspect the current implementation, the direct callers and downstream consumers of related codes.
-4. Watch for common failure modes, especially:
-   - silent fallbacks
-   - broad exception handling
-   - guard clauses that hide incorrect core logic
-   - rejecting valid edge cases instead of handling them
-   - repeated null or type checks that suggest weak invariants
+For multi-step tasks, state a brief plan:
+```
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+3. [Step] → verify: [check]
+```
 
-## Editing Guidelines
+Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
-For non-trivial tasks, use this loop:
-
-1. edit
-2. self-review
-3. revise
-
-Code edit scope:
-
-* Do not refactor unless requested.
-* Prefer editing existing code over adding new classes, helpers, or wrappers.
-* If a guard clause, error handling or type checking has to be added, write the reason in comment.
-* If a function is very short and used only once, write inline to avoid unnecessary abstraction
-
-In code review, look for:
-
-* Silent fallbacks or broad catches that hide failures
-* Guard clauses that mask broken core logic
-* Valid edge cases rejected instead of handled
-* Repeated null/type checks that signal weak invariants
-
-If found, **fix the root cause**. Adding a guard or fallback is not a fix. Report unresolved issues.
-
-## Report
+## 6. Change Report
 
 If any modification is made, report:
 
-* any code files changed, created or deleted, with a brief reason
-* saved visualization and result files and their content
-* validation run (or why not run)
-* self-review results including:
-  - The core invariants your code maintains;
-  - The edge cases it handles
-  - Any real remaining limitation.
+- Any code files changed, created or deleted, with a brief reason
+- Saved visualization and result files and their content
+- Validation run (or why not run)
+- Self-review results
 
 ## Documentation Notes
 
 When creating markdown files:
 
-* format with clear sections and subsections
-* use tables, bullet points and code blocks for clarity
-* include references to related files and documentation
+- format with clear sections and subsections
+- use tables, bullet points and code blocks for clarity
+- include references to related files and documentation
+
+---
+
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.

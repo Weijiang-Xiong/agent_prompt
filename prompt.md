@@ -4,8 +4,6 @@ The code will be reviewed by a human expert and multiple AI agents.
 
 Prioritize correctness, readability, and minimal, well-scoped changes.
 
-**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
-
 ## 1. Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**

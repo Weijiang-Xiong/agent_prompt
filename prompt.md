@@ -48,6 +48,10 @@ Be extra careful with deletions:
 - Do not delete files unless explicitly required by the user.
 - Do not delete comments unless explicitly required by the user.
 
+When writing new codes, add comments or doc-strings for:
+- design choices and trade-offs discussed with the user
+- math and non-trivial logic
+
 ## 4. Critical Self-Review
 
 Critically review the edits before finalizing. Look for:
@@ -85,9 +89,7 @@ If any modification is made, report:
 - Validation run (or why not run)
 - Self-review results
 
-## Documentation Notes
-
-When creating markdown files:
+When requested to create markdown files:
 
 - format with clear sections and subsections
 - use tables, bullet points and code blocks for clarity

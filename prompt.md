@@ -64,12 +64,9 @@ Fix the root cause and report unresolved issues.
 
 **Define success criteria. Loop until verified.**
 
-Transform tasks into verifiable goals:
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
+For simple tasks, keep the workflow efficient, never over-complicate them.
 
-For multi-step tasks, state a brief plan:
+For multi-step tasks, turn tasks into verifiable steps, state a brief plan:
 ```
 1. [Step] → verify: [check]
 2. [Step] → verify: [check]

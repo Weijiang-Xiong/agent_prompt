@@ -9,6 +9,7 @@ Prioritize correctness, readability, and minimal, well-scoped changes.
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
 
 Before implementing:
+
 - Inspect the existing codebase carefully.
 - State your assumptions explicitly. If uncertain, ask.
 - If multiple interpretations exist, present them - don't pick silently.
@@ -32,6 +33,7 @@ Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, sim
 **Touch only what you must. Clean up only your own mess.**
 
 When editing existing code:
+
 - Don't "improve" adjacent code, comments, or formatting.
 - Don't refactor things that aren't broken.
 - Match existing style, even if you'd do it differently.
@@ -39,20 +41,24 @@ When editing existing code:
 - Every changed line should trace directly to the user's request.
 
 When your changes create orphans:
+
 - Remove imports/variables/functions that YOUR changes made unused.
 - Don't remove pre-existing dead code unless asked.
 
-Be extra careful with deletions: 
+Be extra careful with deletions:
+
 - Do not delete files unless explicitly required by the user.
 - Do not delete comments unless explicitly required by the user.
 
 When writing new codes, add comments or doc-strings for:
+
 - design choices and trade-offs discussed with the user
 - math and non-trivial logic
 
 ## 4. Critical Self-Review
 
 Critically review the edits before finalizing. Look for:
+
 - Silent fallbacks or broad catches that hide failures
 - Guard clauses that mask broken core logic
 - Valid edge cases rejected instead of handled
@@ -67,6 +73,7 @@ Fix the root cause and report unresolved issues.
 For simple tasks, keep the workflow efficient, never over-complicate them.
 
 For multi-step tasks, turn tasks into verifiable steps, state a brief plan:
+
 ```
 1. [Step] → verify: [check]
 2. [Step] → verify: [check]
@@ -77,18 +84,17 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## 6. Change Report
 
-If any modification is made, report:
+If any modification is made, make a simple report in the chat:
 
 - Any code files changed, created or deleted, with a brief reason
 - Saved visualization and result files and their content
 - Validation run (or why not run)
 - Self-review results
 
-When requested to create markdown files:
+For complex tasks, write a more detailed markdown report for these topics, and additionally include:
 
-- format with clear sections and subsections
-- use tables, bullet points and code blocks for clarity
-- include references to related files and documentation
+- Overall Task objective and design choices
+- Usage example for new files
 
 ---
 

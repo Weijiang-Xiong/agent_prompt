@@ -1,4 +1,9 @@
-## General Agreements for AI Agents
+---
+name: code-discipline
+description: Must be used for every task that writes, modifies, debugs, reviews, or refactors code. Enforces simple, surgical, non-defensive implementation and verifiable completion.
+---
+
+## Code Discipline for Agents
 
 The code will be reviewed by a human expert and multiple AI agents.
 
@@ -95,7 +100,3 @@ For complex tasks, write a more detailed markdown report for these topics, and a
 
 - Overall Task objective and design choices
 - Usage example for new files
-
----
-
-**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
